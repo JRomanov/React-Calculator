@@ -1,7 +1,9 @@
-import HelloWorld from "./HelloWorld"
+import GridLayout from "./Components/GridLayout"
+import "./App.css"
+
 
 function App() {
-  return <div><HelloWorld /></div>
+  return <div className="Layout"><GridLayout /></div>
 }
 
 export default App

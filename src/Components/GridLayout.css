@@ -1,0 +1,26 @@
+.container {
+    margin: 0 auto;
+    width: 500px!important;
+}
+
+.col {
+    background-color: rgba(112.520718, 44.062154, 249.437846, 0.50);
+    border: 1px solid rgba(112.520718, 44.062154, 249.437846, 0.1);
+    min-width: 100px;
+}
+
+.row {
+    width: 500px;
+}
+
+.GridLayout {
+    justify-content: center; 
+    width: 100vw;
+    margin: 0 auto;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
