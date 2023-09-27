@@ -1,33 +1,51 @@
 import "./GridLayout.css"
+import { useState } from "react";
 
-function cat (values, index) {
+function ButtonLayout ({singleValue, index, setCalcs}) {
     return (
-      <div class="col" style={{paddingLeft: "0px", paddingRight: "0px"}} key={index+"a"}>
-        <button type="button" class="btn" style={{width: "100%", borderRadius: "0px", fontWeight: "bold"}}>{values}</button>
-        {/* onclick on buttons, based on what is clicked, need to perfrom calc, remember useState, useState will only work on capitalized functions */}
+      <div className="col" style={{paddingLeft: "0px", paddingRight: "0px"}} key={index+"a"}>
+        <button 
+          type="button" 
+          className="btn" 
+          onClick={ () => { 
+            setCalcs( (previousValue) => {
+              if (singleValue === "C") {
+                return ""
+              } else if (singleValue === "=") {
+                return /* split String. add numbers in returned Array. return result as a string */
+              } else {
+                return previousValue + singleValue
+              }
+            }) 
+          }} 
+          style={{width: "100%", borderRadius: "0px", fontWeight: "bold"}}>{singleValue}
+        </button>
     </div>
     );
 }
 
-function Dog ({values}) {
+function ColumLayout ({values, setCalcs}) {
   return (
-    <div class="container text-center">
-        <div class="row row-cols-auto">
+    <div className="container text-center">
+        <div className="row row-cols-auto">
           {
-            values.map(cat)
+            values.map( (value, index) => {
+              return <ButtonLayout singleValue={value} key={index} setCalcs={setCalcs}/>
+            })
           }
         </div>
       </div>
   );
 }
 
-function GridLayout() {
-  const [calcs, setCalcs] = useState("")
+  function GridLayout() {
+  const [calcs, setCalcs] = useState("") 
   return (
     <div className="GridLayout">
-      <input type="" onChange={ (event) => {
+      { <input type="" className="output" onChange={ (event) => {
         setCalcs (event.target.value)
-      }} value={calcs} />
+      }} value={calcs} /> 
+      } 
       {
         [
           ["7", "8", "9", "+", "C"], 
@@ -35,7 +53,7 @@ function GridLayout() {
           ["1", "2", "3", "x", "√x"], 
           ["0", ".", "+/-", "/", "="]
         ].map( (characters, index) => {
-          return <Dog values={characters} key={index}/>
+          return <ColumLayout values={characters} key={index} setCalcs={setCalcs}/>
         })
       }
     </div>
