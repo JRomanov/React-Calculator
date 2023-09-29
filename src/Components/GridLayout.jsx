@@ -12,9 +12,11 @@ function ButtonLayout ({singleValue, index, setCalcs}) {
               if (singleValue === "C") {
                 return ""
               } else if (singleValue === "=") {
-                return /* split String. add numbers in returned Array. return result as a string */
+                  return (previousValue + singleValue).split("+").reduce( (accumulator, currentValue) => {
+                    return accumulator + parseInt(currentValue)
+                  }, 0)
               } else {
-                return previousValue + singleValue
+                  return previousValue + singleValue
               }
             }) 
           }} 
