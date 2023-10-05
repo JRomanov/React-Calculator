@@ -55,6 +55,19 @@ function ButtonLayout ({singleValue, index, setCalcs}) {
                     }
                   })
                   return finalNumber
+                } else if ((previousValue).includes("x^2")) {
+                  let arr1 = previousValue.split("x^2")
+                  let finalNumber;
+                  console.log(arr1)
+
+                  arr1.forEach( (currentNumber) => {
+                    if (finalNumber === undefined) {
+                      finalNumber = parseInt(currentNumber)
+                    } else {
+                      finalNumber = finalNumber ** parseInt(currentNumber)
+                    }
+                  })
+                  return finalNumber
                 }
               }  else if (singleValue === "=" && singleValue === "-") {
                 return (previousValue + singleValue).split("-").reduce( (accumulator, currentValue) => {
