@@ -31,6 +31,18 @@ function ButtonLayout ({singleValue, index, setCalcs}) {
                   })
 
                   return finalNumber
+                } else if ((previousValue).includes("x")) {
+                  let arr1 = previousValue.split("x")
+                  let finalNumber;
+
+                  arr1.forEach( (currentNumber) => {
+                    if (finalNumber === undefined) {
+                      finalNumber = parseInt(currentNumber)
+                    } else {
+                      finalNumber = finalNumber * parseInt(currentNumber)
+                    }
+                  })
+                  return finalNumber
                 }
               }  else if (singleValue === "=" && singleValue === "-") {
                 return (previousValue + singleValue).split("-").reduce( (accumulator, currentValue) => {
