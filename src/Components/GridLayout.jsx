@@ -1,5 +1,6 @@
 import "./GridLayout.css"
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import React from "react";
 
 function ButtonLayout ({singleValue, index, setCalcs}) {
     return (
@@ -12,10 +13,30 @@ function ButtonLayout ({singleValue, index, setCalcs}) {
               if (singleValue === "C") {
                 return ""
               } else if (singleValue === "=") {
-                  return (previousValue + singleValue).split("+").reduce( (accumulator, currentValue) => {
+                if ((previousValue).includes("+")) {
+                  return (previousValue).split("+").reduce( (accumulator, currentValue) => {
                     return accumulator + parseInt(currentValue)
                   }, 0)
-              } else {
+                } else if ((previousValue).includes("-")) {
+                  let arr1 = previousValue.split("-")
+
+                  let finalNumber;
+
+                  arr1.forEach( (currentNumber) => {
+                    if (finalNumber === undefined) {
+                      finalNumber = parseInt(currentNumber)
+                    } else {
+                      finalNumber = finalNumber - parseInt(currentNumber)
+                    }
+                  })
+
+                  return finalNumber
+                }
+              }  else if (singleValue === "=" && singleValue === "-") {
+                return (previousValue + singleValue).split("-").reduce( (accumulator, currentValue) => {
+                  return accumulator - parseInt(currentValue)
+                }, 0)
+                }  else {
                   return previousValue + singleValue
               }
             }) 
